@@ -26,7 +26,7 @@ func RegisterUserRoutes(authMiddleware func(http.HandlerFunc) http.HandlerFunc, 
 		UserMu.Unlock()
 
 		if foundUser == nil || bcrypt.CompareHashAndPassword([]byte(foundUser.PasswordHash), []byte(loginReq.Password)) != nil {
-			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+			http.Error(w, "Не верный логин или пароль", http.StatusUnauthorized)
 			return
 		}
 
